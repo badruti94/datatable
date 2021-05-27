@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
+    <style>
+    .buttons-pdf{
+        color: red !important;
+    }
+    </style>
 </head>
 
 <body>
@@ -35,11 +41,16 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
     <script>
         $(document).ready(function() {
             var table = $('#example').DataTable({
                 "ajax": "http://localhost:3000/data/object.php",
-                "pageLength": 3,
                 "columns": [{
                         "data": "name"
                     },
@@ -58,12 +69,16 @@
                     {
                         "data": "salary"
                     }
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
             });
 
-           setInterval(()=>{
-               table.ajax.reload(null, false);
-           }, 500)
+            setInterval(() => {
+                table.ajax.reload(null, false);
+            }, 500)
         });
     </script>
 </body>
